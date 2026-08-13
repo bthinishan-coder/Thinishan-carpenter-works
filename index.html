@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thinishan Carpenter Works | Custom Wood Furniture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut-dark:#241309;
+    --walnut:#3d2114;
+    --walnut-light:#5c3421;
+    --maroon:#7a1b24;
+    --maroon-deep:#5a121a;
+    --gold:#c9973f;
+    --gold-light:#e8c77e;
+    --cream:#f3e9d8;
+    --cream-dim:#d9c9ac;
+    --sawdust:#efe3cb;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--walnut-dark);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:900; letter-spacing:.2px;}
+  .eng{font-family:'Fraunces',serif;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 24px;}
+
+  /* wood grain texture overlay */
+  .grain{
+    position:relative;
+  }
+  .grain::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(100deg, rgba(0,0,0,.12) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(100deg, rgba(255,255,255,.03) 0 1px, transparent 1px 55px);
+    pointer-events:none;
+    mix-blend-mode:overlay;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:linear-gradient(180deg, var(--walnut-dark) 0%, rgba(36,19,9,.96) 100%);
+    border-bottom:1px solid rgba(201,151,63,.25);
+    backdrop-filter:blur(6px);
+  }
+  .navbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 24px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand img{width:56px; height:56px; object-fit:contain;}
+  .brand-text{line-height:1.15;}
+  .brand-text .ta{font-family:'Fraunces',serif; font-weight:700; font-size:16px; color:var(--gold-light);}
+  .brand-text .en{font-family:'Fraunces',serif; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--cream-dim);}
+  .call-btn{
+    background:var(--maroon); color:var(--sawdust); border:1px solid var(--gold);
+    padding:9px 18px; border-radius:3px; font-weight:600; font-size:14px;
+    display:flex; align-items:center; gap:8px;
+    box-shadow:0 2px 0 rgba(0,0,0,.3);
+    white-space:nowrap;
+  }
+  .call-btn:hover{background:var(--maroon-deep);}
+
+  .navbar-right{display:flex; align-items:center; gap:12px;}
+  .menu-btn{
+    width:42px; height:42px; border:1px solid rgba(201,151,63,.4); border-radius:3px;
+    background:transparent; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    cursor:pointer; flex:none;
+  }
+  .menu-btn span{width:20px; height:2px; background:var(--gold-light); display:block; transition:transform .25s ease, opacity .25s ease;}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-btn.open span:nth-child(2){opacity:0;}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .nav-menu{
+    position:absolute; top:100%; right:24px; margin-top:10px;
+    background:var(--walnut-dark); border:1px solid var(--gold);
+    border-radius:4px; overflow:hidden;
+    min-width:190px;
+    box-shadow:0 12px 28px rgba(0,0,0,.5);
+    display:none; flex-direction:column;
+  }
+  .nav-menu.open{display:flex;}
+  .nav-menu a{
+    padding:14px 20px; font-size:14.5px; color:var(--cream);
+    border-bottom:1px solid rgba(201,151,63,.18);
+    letter-spacing:.3px;
+  }
+  .nav-menu a:last-child{border-bottom:none;}
+  .nav-menu a:hover{background:var(--walnut); color:var(--gold-light);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex; align-items:center;
+    background:
+      linear-gradient(120deg, rgba(20,10,4,.92) 0%, rgba(36,19,9,.86) 45%, rgba(36,19,9,.55) 100%),
+      url('backgroundimg.avif') center/cover no-repeat;
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    max-width:780px; margin:0 auto; padding:110px 24px 90px;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+  }
+  .hero-logo{margin-bottom:28px;}
+  .hero-logo img{width:196px; filter:drop-shadow(0 8px 22px rgba(0,0,0,.55));}
+  .devotional{font-size:12px; color:var(--gold); opacity:.85; letter-spacing:.5px; margin-bottom:14px;}
+  .hero h1{
+    font-size:clamp(38px,6vw,64px);
+    color:var(--sawdust);
+    text-shadow:0 4px 18px rgba(0,0,0,.6);
+    line-height:1.12;
+  }
+  .hero .owner{
+    font-family:'Fraunces',serif; font-style:italic; font-size:15px;
+    color:var(--gold-light); margin-top:10px;
+  }
+  .hero .tagline{
+    margin-top:18px; font-size:17px; color:var(--cream-dim); max-width:560px;
+    border-left:3px solid var(--gold); padding-left:14px; text-align:left;
+  }
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; justify-content:center;}
+  .btn-primary{
+    background:var(--gold); color:var(--walnut-dark); font-weight:700;
+    padding:14px 26px; border-radius:2px; font-size:15px;
+    box-shadow:0 4px 0 #8a6321;
+  }
+  .btn-primary:active{transform:translateY(2px); box-shadow:0 2px 0 #8a6321;}
+  .btn-secondary{
+    border:1px solid var(--cream-dim); color:var(--cream);
+    padding:14px 26px; border-radius:2px; font-size:15px;
+  }
+  .hero-loc{margin-top:26px; font-size:13.5px; color:var(--cream-dim); display:flex; gap:8px; align-items:flex-start; max-width:520px; text-align:left;}
+
+  /* ---------- LOGO EMBLEM DIVIDER (signature element) ---------- */
+  .saw-divider{
+    height:76px; position:relative; background:var(--walnut-dark);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .divider-emblem{
+    width:54px; height:54px; z-index:2; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .divider-emblem img{width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 3px 10px rgba(0,0,0,.5));}
+  .saw-divider::before, .saw-divider::after{
+    content:""; position:absolute; top:50%; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    width:50%;
+  }
+  .saw-divider::before{left:0;}
+  .saw-divider::after{right:0;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .section{padding:78px 0;}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 50px;}
+  .eyebrow{
+    font-family:'Fraunces',serif; font-size:12px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--gold); margin-bottom:12px; display:block;
+  }
+  .section-head h2{font-size:clamp(28px,4vw,38px); color:var(--sawdust);}
+  .section-head p{color:var(--cream-dim); margin-top:14px; font-size:15.5px;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--walnut);}
+  .svc-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px;
+  }
+  .svc-card{
+    background:var(--walnut-dark); border:1px solid rgba(201,151,63,.22);
+    border-radius:4px; overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .svc-card:hover{transform:translateY(-6px); border-color:var(--gold);}
+  .svc-img{height:190px; overflow:hidden; position:relative;}
+  .svc-img img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .svc-card:hover .svc-img img{transform:scale(1.08);}
+  .svc-body{padding:18px 20px 24px;}
+  .svc-body .ta{font-family:'Fraunces',serif; font-weight:700; font-size:19px; color:var(--gold-light);}
+  .svc-body .en{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cream-dim); margin-top:2px;}
+  .svc-body p{font-size:13.5px; color:var(--cream-dim); margin-top:10px;}
+  .svc-icon-only{
+    height:190px; display:flex; align-items:center; justify-content:center;
+    background:repeating-linear-gradient(135deg, rgba(201,151,63,.10) 0 12px, rgba(201,151,63,.04) 12px 24px);
+  }
+  .svc-icon-only svg{width:64px; height:64px; stroke:var(--gold);}
+
+  /* ---------- CRAFT / GALLERY ---------- */
+  .craft{background:var(--walnut-dark);}
+  .craft-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;}
+  .craft-photos{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .craft-photos img{border-radius:4px; height:220px; object-fit:cover; border:1px solid rgba(201,151,63,.25);}
+  .craft-photos img:first-child{grid-row:1/3; height:454px;}
+  .craft-text .eyebrow{margin-bottom:10px;}
+  .craft-text h2{font-size:clamp(26px,3.6vw,34px); color:var(--sawdust); margin-bottom:18px;}
+  .craft-text p{color:var(--cream-dim); font-size:15px; margin-bottom:16px;}
+  .tick-list{list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:12px;}
+  .tick-list li{display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--cream);}
+  .tick-list svg{width:18px; height:18px; flex:none; stroke:var(--gold); margin-top:2px;}
+
+  @media (max-width:820px){
+    .craft-grid{grid-template-columns:1fr;}
+    .craft-photos img:first-child{height:220px;}
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--maroon-deep); position:relative;}
+  .contact::before{
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg, rgba(0,0,0,.12) 0 3px, transparent 3px 30px);
+  }
+  .contact-inner{position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .contact-card{
+    background:var(--walnut-dark); border:1px solid var(--gold); border-radius:4px; padding:34px;
+  }
+  .contact-card h3{color:var(--gold-light); font-size:22px; margin-bottom:22px;}
+  .contact-row{display:flex; gap:14px; margin-bottom:18px; align-items:flex-start;}
+  .contact-row svg{width:20px; height:20px; stroke:var(--gold); flex:none; margin-top:2px;}
+  .contact-row .label{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cream-dim);}
+  .contact-row .val{font-size:15.5px; color:var(--cream); margin-top:2px;}
+  .contact-row .val a{color:var(--cream); border-bottom:1px dotted var(--gold-light);}
+  .contact-row .val a:hover{color:var(--gold-light);}
+  .contact-card .btn-primary{width:100%; text-align:center; margin-top:8px;}
+  .contact-copy h2{color:var(--sawdust); font-size:clamp(26px,3.6vw,36px); margin-bottom:16px;}
+  .contact-copy p{color:var(--cream-dim); font-size:15.5px; margin-bottom:14px;}
+  @media (max-width:820px){.contact-inner{grid-template-columns:1fr;}}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{background:var(--walnut);}
+  .gal-toggle{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    margin:0 auto 36px; cursor:pointer; color:var(--gold-light);
+    font-size:13px; letter-spacing:2px; text-transform:uppercase; font-weight:600;
+    width:fit-content;
+  }
+  .gal-toggle .arrow-circle{
+    width:44px; height:44px; border-radius:50%; border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .25s ease;
+  }
+  .gal-toggle:hover .arrow-circle{background:rgba(201,151,63,.15);}
+  .gal-toggle svg{width:18px; height:18px; stroke:var(--gold); transition:transform .35s ease;}
+  .gal-toggle.open svg{transform:rotate(180deg);}
+  .gal-collapse{
+    max-height:0; overflow:hidden;
+    transition:max-height .6s cubic-bezier(.4,0,.2,1);
+  }
+  .gal-collapse.open{max-height:6000px;}
+  .gal-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:16px;
+  }
+  .gal-item{
+    position:relative; border-radius:4px; overflow:hidden; cursor:pointer;
+    border:1px solid rgba(201,151,63,.22); background:var(--walnut-dark);
+    aspect-ratio:4/5;
+  }
+  .gal-item img{width:100%; height:100%; object-fit:cover; transition:transform .4s ease;}
+  .gal-item:hover img{transform:scale(1.07);}
+  .gal-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    background:linear-gradient(0deg, rgba(0,0,0,.82), transparent);
+    color:var(--sawdust); font-size:12.5px; padding:20px 10px 8px;
+  }
+  .lightbox{
+    display:none; position:fixed; inset:0; z-index:200;
+    background:rgba(10,5,2,.92); align-items:center; justify-content:center; padding:30px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw; max-height:85vh; border:2px solid var(--gold); border-radius:4px;}
+  .lightbox-close{
+    position:absolute; top:20px; right:28px; color:var(--sawdust); font-size:34px;
+    cursor:pointer; line-height:1;
+  }
+
+  footer{
+    background:var(--walnut-dark); text-align:center; padding:30px 24px;
+    border-top:1px solid rgba(201,151,63,.2); color:var(--cream-dim); font-size:13px;
+  }
+  footer .fbrand{color:var(--gold-light); font-family:'Fraunces',serif; font-weight:700; margin-bottom:6px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="brand">
+      <img src="logo.png" alt="Thinishan Carpenter Works logo">
+      <div class="brand-text">
+        <div class="ta">Sri Thinishan</div>
+        <div class="en">Carpenter Works</div>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <a class="call-btn" href="tel:+917397705011">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        7397705011
+      </a>
+      <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav-menu" id="navMenu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#gallery" onclick="toggleMenu()">Our Works</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#contact" onclick="toggleMenu()">Location</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-logo"><img src="logo.png" alt="logo"></div>
+    <div>
+      <div class="devotional">Sri Agni Veeran Thunai</div>
+      <h1>Thinishan<br>Wood Turning Works &amp; Furniture</h1>
+      <div class="owner">Proprietor - K. Balamurugan</div>
+      <p class="tagline">Cots, wardrobes, sofas, chairs, dining tables and all types of woodwork - crafted for your home in modern designs at affordable prices.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="tel:+917397705011">📞Call Now-73977 05011</a>
+        <a class="btn-secondary" href="#gallery">See Our Work</a>
+      </div>
+      <div class="hero-loc">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex:none;margin-top:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Near Petrol Bunk, Kumbakonam – Chennai Main Road, Meensurutti (Nellithoppu) – 612 903
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="saw-divider">
+  <div class="divider-emblem"><img src="logo.png" alt="Emblem"></div>
+</div>
+
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our Products</span>
+      <h2>From Cots to Cupboards - All Made to Order</h2>
+      <p>Every piece of furniture is handcrafted from quality wood and delivered in fresh designs suited to your home.</p>
+    </div>
+    <div class="svc-grid">
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="woodencot.jpg" alt="wooden cot bed"></div>
+        <div class="svc-body">
+          <div class="ta">Cots</div>
+          <div class="en">Wooden Cots</div>
+          <p>Solid wood cots in a variety of designs, also available with built-in storage.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="woodensofa.jpg" alt="wooden sofa"></div>
+        <div class="svc-body">
+          <div class="ta">Sofas</div>
+          <div class="en">Wooden Sofa Sets</div>
+          <p>Sturdy, long-lasting wooden sofa sets built to suit your living room.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="diningtable.jpg" alt="wooden dining table"></div>
+        <div class="svc-body">
+          <div class="ta">Dining Tables</div>
+          <div class="en">Dining Tables &amp; Chairs</div>
+          <p>Dining table and chair sets built to a size that suits your family.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="wardrobe.jpg" alt="wooden wardrobe"></div>
+        <div class="svc-body">
+          <div class="ta">Wardrobes</div>
+          <div class="en">Wardrobes &amp; Cupboards</div>
+          <p>Custom-made wardrobes and cupboards built to fit the exact size of your room.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="chairs.jpg" alt="wooden chair"></div>
+        <div class="svc-body">
+          <div class="ta">Chairs</div>
+          <div class="en">In/outdoor Chairs</div>
+          <p>A range of wooden chair models suited for both home and office.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="horse.jpg" alt="Home Decores"></div>
+        <div class="svc-body">
+          <div class="ta">Home Decores</div>
+          <div class="en">Wooden Horse,etc</div>
+          <p>We craft custom-made modern wooden home decor.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="swing.webp" alt="wooden swing"></div>
+        <div class="svc-body">
+          <div class="ta">swing</div>
+          <div class="en">In/outdoor swings</div>
+          <p>Custom indoor & outdoor swings available in modern designs.</p>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-img"><img src="maindoor.jpg" alt="Building Woodwork"></div>
+        <div class="svc-body">
+          <div class="ta">Building Woodwork</div>
+          <div class="en">Building Woodwork</div>
+          <p>All construction-related woodwork, including doors and windows.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="saw-divider">
+  <div class="divider-emblem"><img src="logo.png" alt="Emblem"></div>
+</div>
+
+<section class="section craft" id="about">
+  <div class="wrap craft-grid">
+    <div class="craft-photos">
+      <img src="woods.jpg" alt="Woods">
+      <img src="tools.avif" alt="Tools">
+      <img src="backgroundimg.avif" alt="Sawing wood">
+    </div>
+    <div class="craft-text">
+      <span class="eyebrow">About Us</span>
+      <h2>Quality Woodwork, Handcrafted</h2>
+      <p>At Thinishan Wood Turning Works, every piece of furniture is designed and built directly by experienced craftsmen. Custom designs are also made to your exact requirements, including wardrobe and cupboard work.</p>
+      <ul class="tick-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Durable, long-lasting solid wood</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Fresh designs &amp; custom orders</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Quality work at affordable prices</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Cupboard work also undertaken</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="saw-divider">
+  <div class="divider-emblem"><img src="logo.png" alt="Emblem"></div>
+</div>
+
+<section class="section gallery" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our Works</span>
+      <h2>Finished Pieces From Our Workshop</h2>
+      <p>Real furniture and woodwork completed for our customers. Tap any photo to enlarge it.</p>
+    </div>
+    <div class="gal-toggle" id="galToggleBtn" onclick="toggleGallery()">
+      <span>View Our Works</span>
+      <span class="arrow-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <div class="gal-collapse" id="galCollapse">
+    <div class="gal-grid">
+      <div class="gal-item" onclick="openLightbox('IMG7.jpg')"><img src="IMG7.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG14.jpg')"><img src="IMG14.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG21.jpg')"><img src="IMG21.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG20.jpg')"><img src="IMG20.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG13.jpg')"><img src="IMG13.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG26.jpg')"><img src="IMG26.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG28.png')"><img src="IMG28.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG8.jpg')"><img src="IMG8.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG9.jpg')"><img src="IMG9.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG10.jpg')"><img src="IMG10.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG19.jpg')"><img src="IMG19.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG4.jpg')"><img src="IMG4.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG3.jpg')"><img src="IMG3.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG22.jpg')"><img src="IMG22.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG23.jpg')"><img src="IMG23.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG24.jpg')"><img src="IMG24.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG25.jpg')"><img src="IMG25.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG29.jpg')"><img src="IMG29.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG27.jpg')"><img src="IMG27.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG1.png')"><img src="IMG1.png" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG18.jpg')"><img src="IMG18.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG11.jpg')"><img src="IMG11.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG6.jpg')"><img src="IMG6.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG5.jpg')"><img src="IMG5.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG2.jpg')"><img src="IMG2.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG15.jpg')"><img src="IMG15.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG16.jpg')"><img src="IMG16.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG17.jpg')"><img src="IMG17.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG12.jpg')"><img src="IMG12.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+      <div class="gal-item" onclick="openLightbox('IMG30.jpg')"><img src="IMG30.jpg" alt="IMG" loading="lazy"><div class="gal-cap"></div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="Work photo">
+</div>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-inner">
+    <div class="contact-copy">
+      <span class="eyebrow" style="color:var(--gold-light)">Get In Touch</span>
+      <h2>Order Your Home's Woodwork Today</h2>
+      <p>Cot, sofa, dining table, or wardrobe - whatever the woodwork, call for a free consultation.</p>
+      <p style="color:var(--gold-light); font-weight:600;">Proprietor: K. Balamurugan</p>
+    </div>
+    <div class="contact-card">
+      <h3>Contact Details</h3>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div><div class="label">Mobile</div><div class="val"><a href="tel:+917397705011">73977 05011</a> &nbsp;/&nbsp; <a href="tel:+919498813541">94988 13541</a></div></div>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><div class="label">Address</div><div class="val"><a href="https://maps.app.goo.gl/QcNr1LeRz2uNMNJRA" target="_blank" rel="noopener">Near Petrol Bunk, Kumbakonam – Chennai Main Road, Meensurutti (Nellithoppu) – 612 903</a></div></div>
+      </div>
+      <a class="btn-primary" href="tel:+917397705011">📞Call:73977 05011</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">Thinishan Wood Works &amp; Furniture</div>
+  <div>Proprietor: K. Balamurugan - 73977 05011 / 94988 13541</div>
+</footer>
+
+<script>
+  function toggleMenu(){
+    document.getElementById('menuBtn').classList.toggle('open');
+    document.getElementById('navMenu').classList.toggle('open');
+  }
+  function openLightbox(src){
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  function toggleGallery(){
+    document.getElementById('galCollapse').classList.toggle('open');
+    document.getElementById('galToggleBtn').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
